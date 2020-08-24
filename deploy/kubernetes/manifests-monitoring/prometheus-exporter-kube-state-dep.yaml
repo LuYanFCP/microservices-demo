@@ -1,11 +1,15 @@
-apiVersion: extensions/v1beta1
+# apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: kube-state-metrics-deployment
   namespace: monitoring
 spec:
   replicas: 1
-  template:
+  selector:
+    matchLabels:
+      app: kube-state-metrics
+  template:  
     metadata:
       labels:
         app: kube-state-metrics
