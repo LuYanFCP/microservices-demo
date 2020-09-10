@@ -14,6 +14,12 @@ data:
     rule_files:
       - "/etc/prometheus-rules/alert.rules"
     scrape_configs:
+      - job_name: 'cassandra_monitor'
+        scrape_interval: 60s
+        scrape_timeout: 60s
+        static_configs:
+        - targets: ['10.244.0.233:9042']
+
       - job_name: kubernetes-service-endpoints
         kubernetes_sd_configs:
           - role: endpoints
@@ -32,7 +38,7 @@ data:
             action: drop
             regex: 'true'
           - source_labels:
-              - __meta_kubernetes_service_annotation_prometheus_io_scrape
+              - __meta_kubernetpromees_service_annotation_prometheus_io_scrape
             action: drop
             regex: 'false'
           - source_labels:
